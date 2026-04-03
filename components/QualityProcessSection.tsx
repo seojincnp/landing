@@ -133,9 +133,9 @@ function StepCard({ item }: { item: (typeof steps)[number] }) {
 
 function MobileStep({ item, isLast }: { item: (typeof steps)[number]; isLast: boolean }) {
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-3">
       {/* 좌측: 넘버 + 세로선 */}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center pt-1">
         <div className="w-10 h-10 bg-primary text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-md shadow-primary/25 shrink-0 z-10">
           {item.step}
         </div>
@@ -146,12 +146,12 @@ function MobileStep({ item, isLast }: { item: (typeof steps)[number]; isLast: bo
       <div className="flex-1 pb-6">
         <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100/80">
           <div className="flex items-center gap-2.5 mb-2">
-            <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary shrink-0">
+            <div className="w-6 h-6 bg-primary/10 rounded-md flex items-center justify-center text-primary shrink-0 [&>svg]:w-4 [&>svg]:h-4">
               {item.icon}
             </div>
-            <h3 className="text-sm font-bold text-text">{item.title}</h3>
+            <h3 className="text-[15px] font-semibold text-text">{item.title}</h3>
           </div>
-          <p className="text-xs text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
+          <p className="text-sm text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
             {item.description}
           </p>
         </div>
@@ -178,7 +178,7 @@ export default function QualityProcessSection() {
         </div>
 
         {/* ── 데스크톱: 2행 스텝퍼 ── */}
-        <div className="hidden lg:block space-y-4">
+        <div className="hidden lg:block">
           {/* 1행: 01→02→03→04 */}
           <div className="flex items-stretch">
             {row1.map((item, i) => (
@@ -191,9 +191,12 @@ export default function QualityProcessSection() {
 
           {/* 연결 화살표 */}
           <div className="flex justify-end pr-[calc(12.5%-20px)]">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-primary/50">
-              <path d="M10 3v14m0 0l-4-4m4 4l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <div className="flex flex-col items-center gap-1">
+              <div className="h-6 w-px bg-primary/30" />
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-primary/50">
+                <path d="M6 2v8m0 0L3 7m3 3l3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
           </div>
 
           {/* 2행: 08←07←06←05 */}
