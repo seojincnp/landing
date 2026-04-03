@@ -1,4 +1,49 @@
+"use client";
+
+import { useState } from "react";
+
+type FormStatus = "idle" | "loading" | "success" | "error";
+
 export default function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "전송에 실패했습니다.");
+      }
+
+      setStatus("success");
+      setFormData({ name: "", phone: "", email: "", message: "" });
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(err instanceof Error ? err.message : "전송에 실패했습니다.");
+    }
+  };
+
   return (
     <section id="contact" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,57 +119,93 @@ export default function ContactSection() {
           {/* Right - Form */}
           <div className="bg-surface border border-gray-100 p-8 rounded-2xl shadow-md flex flex-col">
             <h3 className="text-lg font-bold text-text mb-4">견적 문의</h3>
-            <form className="flex flex-col gap-4 flex-1">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-text mb-1.5">
-                  이름 / 회사명
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                  placeholder="홍길동 / OO기업"
-                />
+
+            {status === "success" ? (
+              <div className="flex-1 flex flex-col items-center justify-center text-center py-12">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                  <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h4 className="text-lg font-semibold text-text mb-1">문의가 접수되었습니다</h4>
+                <p className="text-text-light text-sm mb-6">빠른 시일 내에 연락드리겠습니다.</p>
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="text-primary text-sm font-semibold hover:underline"
+                >
+                  추가 문의하기
+                </button>
               </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-text mb-1.5">
-                  연락처
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                  placeholder="010-0000-0000"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-text mb-1.5">
-                  이메일
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                  placeholder="example@company.com"
-                />
-              </div>
-              <div className="flex-1 flex flex-col">
-                <label htmlFor="message" className="block text-sm font-medium text-text mb-1.5">
-                  문의 내용
-                </label>
-                <textarea
-                  id="message"
-                  className="w-full flex-1 min-h-[120px] px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors resize-none"
-                  placeholder="제작하고 싶은 라벨에 대해 알려주세요. (종류, 수량, 사이즈, 소재 등)"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-primary text-white py-3 rounded-lg text-sm font-semibold hover:bg-primary-light transition-colors"
-              >
-                견적 요청하기
-              </button>
-            </form>
+            ) : (
+              <form className="flex flex-col gap-4 flex-1" onSubmit={handleSubmit}>
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-text mb-1.5">
+                    이름 / 회사명 <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                    placeholder="홍길동 / OO기업"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-text mb-1.5">
+                    연락처 <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                    placeholder="010-0000-0000"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-text mb-1.5">
+                    이메일
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                    placeholder="example@company.com"
+                  />
+                </div>
+                <div className="flex-1 flex flex-col">
+                  <label htmlFor="message" className="block text-sm font-medium text-text mb-1.5">
+                    문의 내용 <span className="text-red-400">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    className="w-full flex-1 min-h-[120px] px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors resize-none"
+                    placeholder="제작하고 싶은 라벨에 대해 알려주세요. (종류, 수량, 사이즈, 소재 등)"
+                  />
+                </div>
+
+                {status === "error" && (
+                  <p className="text-red-500 text-sm">{errorMessage}</p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="w-full bg-primary text-white py-3 rounded-lg text-sm font-semibold hover:bg-primary-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {status === "loading" ? "전송 중..." : "견적 요청하기"}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
