@@ -69,7 +69,7 @@ export default function ContactSection() {
             문의 & 오시는 길
           </motion.h2>
           <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
-            라벨 인쇄에 관한 궁금한 점이 있으시면 언제든 편하게 연락해 주세요.
+            라벨 인쇄에 관한 궁금한 점이 있으시면 <br className="sm:hidden" />언제든 편하게 연락해 주세요.
           </motion.p>
         </motion.div>
 
@@ -115,7 +115,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-text">주소</p>
-                  <p className="text-text-light">경기도 구리시 갈매순환로 166번길 45, 구리갈매아너시티 지하2층 BH232~235호</p>
+                  <p className="text-text-light">경기도 구리시 갈매순환로 166번길 45, <br className="sm:hidden" />구리갈매아너시티 지하2층 BH232~235호</p>
                 </div>
               </motion.div>
             </motion.div>
