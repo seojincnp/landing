@@ -153,7 +153,7 @@ export default function AboutSection() {
 
           {/* 모바일: 세로 타임라인 */}
           <motion.div
-            className="lg:hidden"
+            className="lg:hidden pl-3"
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
