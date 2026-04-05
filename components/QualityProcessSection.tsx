@@ -129,25 +129,25 @@ function StepConnector({ direction }: { direction: "right" | "left" }) {
 function StepCard({ item }: { item: (typeof steps)[number] }) {
   return (
     <div className="relative bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 h-full border border-gray-100/80 overflow-hidden">
-        {/* 아이콘 오버레이 */}
-        <div className="absolute right-2 top-0 w-28 h-28 text-primary/[0.07] pointer-events-none">
-          <div className="w-full h-full [&>svg]:w-full [&>svg]:h-full">
-            {item.icon}
-          </div>
+      {/* 아이콘 오버레이 */}
+      <div className="absolute right-2 top-0 w-28 h-28 text-primary/[0.07] pointer-events-none">
+        <div className="w-full h-full [&>svg]:w-full [&>svg]:h-full">
+          {item.icon}
         </div>
+      </div>
 
-        {/* 넘버 */}
-        <div className="w-11 h-11 bg-primary text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-md shadow-primary/25 shrink-0 mb-4">
-          {item.step}
-        </div>
+      {/* 넘버 */}
+      <div className="w-11 h-11 bg-primary text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-md shadow-primary/25 shrink-0 mb-4">
+        {item.step}
+      </div>
 
-        {/* 제목 */}
-        <h3 className="text-base font-bold text-text mb-2 relative">{item.title}</h3>
+      {/* 제목 */}
+      <h3 className="text-base font-bold text-text mb-2 relative">{item.title}</h3>
 
-        {/* 설명 */}
-        <p className="text-sm text-text-light leading-relaxed relative" style={{ wordBreak: "keep-all" }}>
-          {item.description}
-        </p>
+      {/* 설명 */}
+      <p className="text-sm text-text-light leading-relaxed relative" style={{ wordBreak: "keep-all" }}>
+        {item.description}
+      </p>
     </div>
   );
 }
@@ -196,7 +196,7 @@ export default function QualityProcessSection() {
           <motion.span variants={fadeInUp} className="text-primary text-sm font-semibold tracking-wide uppercase block">
             Quality Process
           </motion.span>
-          <motion.h2 variants={fadeInUp} className="mt-2 text-3xl sm:text-4xl font-bold text-text">
+          <motion.h2 variants={fadeInUp} className="mt-2 text-2xl sm:text-4xl font-bold text-text">
             품질 관리
           </motion.h2>
           <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">

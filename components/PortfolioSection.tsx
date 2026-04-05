@@ -80,7 +80,7 @@ export default function PortfolioSection() {
           <motion.span variants={fadeInUp} className="text-primary text-sm font-semibold tracking-wide uppercase block">
             Portfolio
           </motion.span>
-          <motion.h2 variants={fadeInUp} className="mt-2 text-3xl sm:text-4xl font-bold text-text">
+          <motion.h2 variants={fadeInUp} className="mt-2 text-2xl sm:text-4xl font-bold text-text">
             주요 거래선
           </motion.h2>
           <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">

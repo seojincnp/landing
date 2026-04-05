@@ -65,7 +65,7 @@ export default function HeroSection() {
             {/* 메인 타이틀 */}
             <motion.h1
               variants={fadeUp}
-              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-8"
+              className="text-3xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-8"
             >
               결과로 증명하는 라벨 파트너
             </motion.h1>

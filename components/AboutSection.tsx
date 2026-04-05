@@ -146,7 +146,7 @@ export default function AboutSection() {
             <span className="text-primary text-sm font-semibold tracking-wide uppercase">
               History
             </span>
-            <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-text">
+            <h2 className="mt-2 text-2xl sm:text-4xl font-bold text-text">
               회사 연혁
             </h2>
           </motion.div>

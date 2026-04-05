@@ -65,7 +65,7 @@ export default function ContactSection() {
           <motion.span variants={fadeInUp} className="text-primary text-sm font-semibold tracking-wide uppercase block">
             Contact
           </motion.span>
-          <motion.h2 variants={fadeInUp} className="mt-2 text-3xl sm:text-4xl font-bold text-text">
+          <motion.h2 variants={fadeInUp} className="mt-2 text-2xl sm:text-4xl font-bold text-text">
             문의 & 오시는 길
           </motion.h2>
           <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
@@ -140,7 +140,7 @@ export default function ContactSection() {
 
           {/* Right - Form */}
           <motion.div
-            className="bg-surface border border-gray-100 p-8 rounded-2xl shadow-md flex flex-col"
+            className="bg-surface border border-gray-100 p-5 sm:p-8 rounded-2xl shadow-md flex flex-col"
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
