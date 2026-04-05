@@ -41,7 +41,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center pt-16 overflow-hidden"
+      className="relative min-h-screen flex items-start lg:items-center pt-26 pb-14 lg:pt-16 lg:pb-0 overflow-hidden"
     >
       {/* 배경: 느린 그라디언트 시프트 */}
       <div className="absolute inset-0 hero-gradient" />
@@ -65,7 +65,7 @@ export default function HeroSection() {
             {/* 메인 타이틀 */}
             <motion.h1
               variants={fadeUp}
-              className="text-3xl sm:text-4xl lg:text-4xl font-bold text-white leading-tight mb-8"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-8"
             >
               결과로 증명하는 라벨 파트너
             </motion.h1>
@@ -171,18 +171,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* 스크롤 인디케이터 */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="text-white/50 text-xs tracking-widest uppercase">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <svg className="w-5 h-5 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </motion.div>
-      </div>
     </section>
   );
 }
