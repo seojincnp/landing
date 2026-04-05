@@ -1,3 +1,14 @@
+"use client";
+
+import { motion } from "framer-motion";
+import {
+  fadeInUp,
+  fadeInLeft,
+  fadeInRight,
+  staggerContainer,
+  viewportOnce,
+} from "@/lib/motions";
+
 const strengths = [
   {
     title: "통합 공정",
@@ -60,35 +71,47 @@ export default function AboutSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 회사소개 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div>
-            <span className="text-primary text-sm font-semibold tracking-wide uppercase">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer(0.12)}
+          >
+            <motion.span variants={fadeInUp} className="text-primary text-sm font-semibold tracking-wide uppercase block">
               About Us
-            </span>
-            <h2 className="mt-2 text-2xl sm:text-4xl font-bold text-text">
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className="mt-2 text-2xl sm:text-4xl font-bold text-text">
               제품의 가치를 완성하는 기술과 신뢰
-            </h2>
-            <p className="mt-5 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="mt-5 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
               (주)서진씨앤피는 1996년 설립 이래, 단순한 인쇄를 넘어 고객사의 브랜드 경쟁력을 강화하는 라벨 전문 기업입니다. 브랜드의 가치를 완성하는 디테일, 그 차이를 만들어냅니다.
-            </p>
-            <p className="mt-3 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
+            </motion.p>
+            <motion.p variants={fadeInUp} className="mt-3 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
               제품의 첫인상을 결정짓는 라벨은 브랜드 아이덴티티를 전달하는 핵심 요소입니다. 저희는 디자인 기획부터 인쇄, 후가공, 품질 관리까지 전 공정을 통합 운영하며, 일관된 품질과 높은 완성도를 보장합니다.
-            </p>
-            <p className="mt-3 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
+            </motion.p>
+            <motion.p variants={fadeInUp} className="mt-3 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
               식품, 화장품, 의약품, 산업용 제품 등 다양한 분야에서 축적된 경험을 바탕으로 각 산업의 특성과 규격에 부합하는 맞춤형 라벨을 제공하고 있으며, 고도화된 인쇄 기술과 안정적인 생산 시스템을 통해 대량 생산부터 정밀 프로젝트까지 유연하게 대응합니다.
-            </p>
-            <p className="mt-3 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
+            </motion.p>
+            <motion.p variants={fadeInUp} className="mt-3 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
               현재도 국내 주요 식품·화장품 기업과 지속적인 파트너십을 유지하고 있으며, 앞으로도 신뢰를 기반으로 고객사의 브랜드 가치를 높이는 라벨 솔루션을 제공하겠습니다.
-            </p>
-            <p className="mt-4 text-text font-medium">
+            </motion.p>
+            <motion.p variants={fadeInUp} className="mt-4 text-text font-medium">
               대표이사 채기옥
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           {/* 강점 카드 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer(0.12, 0.2)}
+          >
             {strengths.map((item, i) => (
-              <div
+              <motion.div
                 key={item.title}
+                variants={i % 2 === 0 ? fadeInLeft : fadeInRight}
                 className="relative bg-surface border border-gray-100 p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow overflow-hidden"
               >
                 {/* 배경 넘버 */}
@@ -106,26 +129,38 @@ export default function AboutSection() {
                     {item.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* 연혁 가로 스크롤 타임라인 */}
         <div className="mt-16 lg:mt-24">
-          <div className="text-center mb-5">
+          <motion.div
+            className="text-center mb-5"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={fadeInUp}
+          >
             <span className="text-primary text-sm font-semibold tracking-wide uppercase">
               History
             </span>
             <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-text">
               회사 연혁
             </h2>
-          </div>
+          </motion.div>
 
           {/* 모바일: 세로 타임라인 */}
-          <div className="lg:hidden">
+          <motion.div
+            className="lg:hidden"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer(0.08)}
+          >
             {history.map((item, i) => (
-              <div key={item.year} className="flex gap-4">
+              <motion.div key={item.year} className="flex gap-4" variants={fadeInLeft}>
                 {/* 좌측: 도트 + 라인 */}
                 <div className="flex flex-col items-center shrink-0">
                   <div className="w-3 h-3 bg-primary rounded-full ring-4 ring-white shrink-0 mt-1" />
@@ -139,7 +174,7 @@ export default function AboutSection() {
                     <p className="text-text-light/60 text-xs mt-0.5">{item.sub}</p>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
             {/* 하단 쉐브론 */}
             <div className="flex flex-col items-center ml-[3px] gap-0.5">
@@ -153,10 +188,16 @@ export default function AboutSection() {
                 <path d="M2 2l10 10L22 2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-          </div>
+          </motion.div>
 
           {/* PC: 가로 타임라인 */}
-          <div className="hidden lg:block max-w-6xl mx-auto overflow-visible">
+          <motion.div
+            className="hidden lg:block max-w-6xl mx-auto overflow-visible"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer(0.08, 0.2)}
+          >
             <div className="relative flex items-center overflow-visible">
               <div className="relative grid grid-cols-10 overflow-visible flex-1">
                 <div className="absolute top-1/2 left-[5%] right-0 h-px bg-primary/20 -translate-y-px" />
@@ -164,8 +205,9 @@ export default function AboutSection() {
                 {history.map((item, i) => {
                   const isTop = i % 2 === 0;
                   return (
-                    <div
+                    <motion.div
                       key={item.year}
+                      variants={fadeInUp}
                       className="group relative flex flex-col items-center cursor-default overflow-visible"
                     >
                       <div className={`flex flex-col items-center justify-end h-24 pb-2 overflow-visible transition-transform duration-300 group-hover:scale-105 ${isTop ? "opacity-100" : "opacity-0"}`}>
@@ -185,7 +227,7 @@ export default function AboutSection() {
                           <p className="text-text-light/60 text-xs leading-snug text-center whitespace-pre-line min-w-[120px] mt-0.5 transition-colors duration-300 group-hover:text-text-light">{item.sub}</p>
                         )}
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
@@ -202,7 +244,7 @@ export default function AboutSection() {
                 </svg>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

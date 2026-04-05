@@ -1,4 +1,13 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  fadeInUp,
+  scaleIn,
+  staggerContainer,
+  viewportOnce,
+} from "@/lib/motions";
 
 const mainEquipment = [
   {
@@ -41,28 +50,41 @@ export default function EquipmentSection() {
   return (
     <section id="equipment" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="text-primary text-sm font-semibold tracking-wide uppercase">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.1)}
+        >
+          <motion.span variants={fadeInUp} className="text-primary text-sm font-semibold tracking-wide uppercase block">
             Equipment
-          </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-text">
+          </motion.span>
+          <motion.h2 variants={fadeInUp} className="mt-2 text-3xl sm:text-4xl font-bold text-text">
             보유 설비 현황
-          </h2>
-          <p className="mt-4 text-text-light max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
             최신 인쇄 설비를 순차적으로 도입하여 어떠한 라벨 인쇄물에도
             대응할 수 있는 생산 체계를 갖추고 있습니다.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* 메인 장비 4대 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.15)}
+        >
           {mainEquipment.map((item) => (
-            <div
+            <motion.div
               key={item.name}
+              variants={fadeInUp}
               className="bg-surface rounded-2xl overflow-hidden"
             >
               {/* 이미지 영역 */}
-              <div className="aspect-[4/3] relative bg-white">
+              <div className="aspect-4/3 relative bg-white">
                 <Image
                   src={item.image}
                   alt={item.name}
@@ -84,19 +106,32 @@ export default function EquipmentSection() {
                   {item.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* 보조 장비 7대 */}
         <div className="mt-12">
-          <h3 className="text-sm font-semibold text-text-light uppercase tracking-wide mb-6 text-center">
+          <motion.h3
+            className="text-sm font-semibold text-text-light uppercase tracking-wide mb-6 text-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={fadeInUp}
+          >
             그 외 보유 설비
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5">
+          </motion.h3>
+          <motion.div
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-5"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer(0.06)}
+          >
             {subEquipment.map((item) => (
-              <div
+              <motion.div
                 key={item.name}
+                variants={scaleIn}
                 className="bg-white rounded-xl p-5 text-center"
               >
                 <div className="w-32 h-32 relative mx-auto mb-3">
@@ -109,9 +144,9 @@ export default function EquipmentSection() {
                   />
                 </div>
                 <p className="text-sm font-medium text-text">{item.name}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

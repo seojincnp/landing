@@ -3,6 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  fadeInUp,
+  staggerContainer,
+  viewportOnce,
+} from "@/lib/motions";
 
 const categories = ["생활용품", "식품", "의약품", "화장품", "RFID"] as const;
 type Category = (typeof categories)[number];
@@ -65,25 +70,31 @@ export default function PortfolioSection() {
   return (
     <section id="portfolio" className="py-20 lg:py-28 bg-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <span className="text-primary text-sm font-semibold tracking-wide uppercase">
+        <motion.div
+          className="text-center mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.1)}
+        >
+          <motion.span variants={fadeInUp} className="text-primary text-sm font-semibold tracking-wide uppercase block">
             Portfolio
-          </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-text">
+          </motion.span>
+          <motion.h2 variants={fadeInUp} className="mt-2 text-3xl sm:text-4xl font-bold text-text">
             주요 거래선
-          </h2>
-          <p className="mt-4 text-text-light max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
             다양한 산업 분야의 고객사에 라벨을 공급하고 있습니다.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* 카테고리 필터 */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex justify-center gap-1.5 sm:gap-2 mb-10">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${activeCategory === cat
+              className={`px-3.5 sm:px-5 py-2.5 rounded-full text-sm sm:text-md font-medium transition-all duration-200 cursor-pointer ${activeCategory === cat
                 ? "bg-primary text-white shadow-md shadow-primary/25"
                 : "bg-white text-text-light hover:bg-primary/10 hover:text-primary"
                 }`}
@@ -143,7 +154,13 @@ export default function PortfolioSection() {
       </div>
 
       {/* 거래처 마퀴 슬라이드 */}
-      <div className="mt-16 pt-12 border-t border-gray-200/60">
+      <motion.div
+        className="mt-16 pt-12 border-t border-gray-200/60"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={viewportOnce}
+        transition={{ duration: 0.6 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
           <p className="text-text-light text-sm font-semibold tracking-widest uppercase">
             Trusted Partners
@@ -178,7 +195,7 @@ export default function PortfolioSection() {
             ))}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

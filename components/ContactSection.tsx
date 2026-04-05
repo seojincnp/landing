@@ -1,6 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  fadeInUp,
+  fadeInLeft,
+  fadeInRight,
+  staggerContainer,
+  viewportOnce,
+} from "@/lib/motions";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -47,23 +55,34 @@ export default function ContactSection() {
   return (
     <section id="contact" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="text-primary text-sm font-semibold tracking-wide uppercase">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.1)}
+        >
+          <motion.span variants={fadeInUp} className="text-primary text-sm font-semibold tracking-wide uppercase block">
             Contact
-          </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-text">
+          </motion.span>
+          <motion.h2 variants={fadeInUp} className="mt-2 text-3xl sm:text-4xl font-bold text-text">
             문의 & 오시는 길
-          </h2>
-          <p className="mt-4 text-text-light max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
             라벨 인쇄에 관한 궁금한 점이 있으시면 언제든 편하게 연락해 주세요.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Left - Info + Map */}
-          <div>
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer(0.12)}
+          >
+            <motion.div className="space-y-6" variants={staggerContainer(0.1)}>
+              <motion.div variants={fadeInLeft} className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -73,9 +92,9 @@ export default function ContactSection() {
                   <p className="text-sm font-semibold text-text">전화</p>
                   <p className="text-text-light">031-571-9550 / 010-9615-5640</p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="flex items-start gap-4">
+              <motion.div variants={fadeInLeft} className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -85,9 +104,9 @@ export default function ContactSection() {
                   <p className="text-sm font-semibold text-text">이메일</p>
                   <p className="text-text-light">sjin5640@daum.net</p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="flex items-start gap-4">
+              <motion.div variants={fadeInLeft} className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -98,11 +117,14 @@ export default function ContactSection() {
                   <p className="text-sm font-semibold text-text">주소</p>
                   <p className="text-text-light">경기도 구리시 갈매순환로 166번길 45, 구리갈매아너시티 지하2층 BH232~235호</p>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* 오시는 길 - Google Maps */}
-            <div className="mt-8 rounded-2xl overflow-hidden bg-white shadow-sm">
+            <motion.div
+              className="mt-8 rounded-2xl overflow-hidden bg-white shadow-sm"
+              variants={fadeInUp}
+            >
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3159.602022194114!2d127.11860117882684!3d37.63504823871318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357cb9605e04510f%3A0x506dcde3712f3a2f!2z6rWs66as6rCI66ek7JWE64SI7Iuc7Yuw!5e0!3m2!1sko!2skr!4v1774073770493!5m2!1sko!2skr"
                 width="100%"
@@ -113,11 +135,17 @@ export default function ContactSection() {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="서진씨엔피 오시는 길"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right - Form */}
-          <div className="bg-surface border border-gray-100 p-8 rounded-2xl shadow-md flex flex-col">
+          <motion.div
+            className="bg-surface border border-gray-100 p-8 rounded-2xl shadow-md flex flex-col"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={fadeInRight}
+          >
             <h3 className="text-lg font-bold text-text mb-4">견적 문의</h3>
 
             {status === "success" ? (
@@ -206,7 +234,7 @@ export default function ContactSection() {
                 </button>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

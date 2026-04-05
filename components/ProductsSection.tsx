@@ -1,3 +1,13 @@
+"use client";
+
+import { motion } from "framer-motion";
+import {
+  fadeInUp,
+  scaleIn,
+  staggerContainer,
+  viewportOnce,
+} from "@/lib/motions";
+
 const products = [
   {
     title: "생활용품 라벨",
@@ -59,22 +69,35 @@ export default function ProductsSection() {
   return (
     <section id="products" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="text-primary text-sm font-semibold tracking-wide uppercase">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.1)}
+        >
+          <motion.span variants={fadeInUp} className="text-primary text-sm font-semibold tracking-wide uppercase block">
             Products
-          </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-text">
+          </motion.span>
+          <motion.h2 variants={fadeInUp} className="mt-2 text-3xl sm:text-4xl font-bold text-text">
             제안 품목
-          </h2>
-          <p className="mt-4 text-text-light max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
             각 업계의 특성에 적합한 다양한 라벨을 생산하여 공급하고 있습니다.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.1, 0.1)}
+        >
           {products.map((product) => (
-            <div
+            <motion.div
               key={product.title}
+              variants={scaleIn}
               className="group p-8 rounded-2xl border border-gray-100 hover:border-primary/20 hover:shadow-lg transition-all duration-300"
             >
               <div className="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
@@ -86,9 +109,9 @@ export default function ProductsSection() {
               <p className="text-text-light text-sm leading-relaxed">
                 {product.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

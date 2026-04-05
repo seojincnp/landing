@@ -1,5 +1,16 @@
 "use client";
 
+import { Fragment } from "react";
+import { motion } from "framer-motion";
+import {
+  fadeInUp,
+  fadeInLeft,
+  fadeInRight,
+  staggerContainer,
+  viewportOnce,
+} from "@/lib/motions";
+import type { Variants } from "framer-motion";
+
 const steps = [
   {
     step: "01",
@@ -86,6 +97,18 @@ const steps = [
 const row1 = steps.slice(0, 4);
 const row2 = [...steps.slice(4, 8)].reverse();
 
+/** 1행: 왼쪽→오른쪽 순차 */
+const row1Container: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+};
+
+/** 2행: 05→06→07→08 순서 (reverse 배열이므로 staggerDirection: -1로 끝→처음) */
+const row2Container: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.3, staggerDirection: -1 } },
+};
+
 function StepConnector({ direction }: { direction: "right" | "left" }) {
   return (
     <div className="hidden lg:flex items-center justify-center w-10 shrink-0">
@@ -105,8 +128,7 @@ function StepConnector({ direction }: { direction: "right" | "left" }) {
 
 function StepCard({ item }: { item: (typeof steps)[number] }) {
   return (
-    <div className="flex-1 min-w-0">
-      <div className="relative bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 h-full border border-gray-100/80 overflow-hidden">
+    <div className="relative bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 h-full border border-gray-100/80 overflow-hidden">
         {/* 아이콘 오버레이 */}
         <div className="absolute right-2 top-0 w-28 h-28 text-primary/[0.07] pointer-events-none">
           <div className="w-full h-full [&>svg]:w-full [&>svg]:h-full">
@@ -126,14 +148,13 @@ function StepCard({ item }: { item: (typeof steps)[number] }) {
         <p className="text-sm text-text-light leading-relaxed relative" style={{ wordBreak: "keep-all" }}>
           {item.description}
         </p>
-      </div>
     </div>
   );
 }
 
 function MobileStep({ item, isLast }: { item: (typeof steps)[number]; isLast: boolean }) {
   return (
-    <div className="flex gap-3">
+    <motion.div className="flex gap-3" variants={fadeInLeft}>
       {/* 좌측: 넘버 + 세로선 */}
       <div className="flex flex-col items-center pt-1">
         <div className="w-10 h-10 bg-primary text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-md shadow-primary/25 shrink-0 z-10">
@@ -156,7 +177,7 @@ function MobileStep({ item, isLast }: { item: (typeof steps)[number]; isLast: bo
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -165,57 +186,91 @@ export default function QualityProcessSection() {
     <section id="process" className="py-20 lg:py-28 bg-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 헤더 */}
-        <div className="text-center mb-16">
-          <span className="text-primary text-sm font-semibold tracking-wide uppercase">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.1)}
+        >
+          <motion.span variants={fadeInUp} className="text-primary text-sm font-semibold tracking-wide uppercase block">
             Quality Process
-          </span>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-text">
+          </motion.span>
+          <motion.h2 variants={fadeInUp} className="mt-2 text-3xl sm:text-4xl font-bold text-text">
             품질 관리
-          </h2>
-          <p className="mt-4 text-text-light max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
             품질, 공정, 결과까지 설계합니다.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* ── 데스크톱: 2행 스텝퍼 ── */}
         <div className="hidden lg:block">
           {/* 1행: 01→02→03→04 */}
-          <div className="flex items-stretch">
+          <motion.div
+            className="flex items-stretch"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={row1Container}
+          >
             {row1.map((item, i) => (
-              <div key={item.step} className="contents">
-                <StepCard item={item} />
+              <Fragment key={item.step}>
+                <motion.div className="flex-1 min-w-0" variants={fadeInRight}>
+                  <StepCard item={item} />
+                </motion.div>
                 {i < row1.length - 1 && <StepConnector direction="right" />}
-              </div>
+              </Fragment>
             ))}
-          </div>
+          </motion.div>
 
           {/* 연결 화살표 */}
-          <div className="flex justify-end pr-[calc(12.5%-20px)]">
+          <motion.div
+            className="flex justify-end pr-[calc(12.5%-20px)]"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={viewportOnce}
+            transition={{ delay: 0.6, duration: 0.4 }}
+          >
             <div className="flex flex-col items-center gap-1">
               <div className="h-6 w-px bg-primary/30" />
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-primary/50">
                 <path d="M6 2v8m0 0L3 7m3 3l3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-          </div>
+          </motion.div>
 
           {/* 2행: 08←07←06←05 */}
-          <div className="flex items-stretch">
+          <motion.div
+            className="flex items-stretch"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={row2Container}
+          >
             {row2.map((item, i) => (
-              <div key={item.step} className="contents">
-                <StepCard item={item} />
+              <Fragment key={item.step}>
+                <motion.div className="flex-1 min-w-0" variants={fadeInLeft}>
+                  <StepCard item={item} />
+                </motion.div>
                 {i < row2.length - 1 && <StepConnector direction="left" />}
-              </div>
+              </Fragment>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* ── 모바일: 세로 타임라인 ── */}
-        <div className="lg:hidden">
+        <motion.div
+          className="lg:hidden"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.08)}
+        >
           {steps.map((item, i) => (
             <MobileStep key={item.step} item={item} isLast={i === steps.length - 1} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
