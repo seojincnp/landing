@@ -64,8 +64,8 @@ export default function EquipmentSection() {
             보유 설비 현황
           </motion.h2>
           <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
-            최신 인쇄 설비를 순차적으로 도입하여 어떠한 라벨 인쇄물에도
-            대응할 수 있는 생산 체계를 갖추고 있습니다.
+            최신 인쇄 설비를 순차적으로 도입하여 어떠한 라벨<br className="sm:hidden" />
+            인쇄물에도 대응할 수 있는 생산 체계를 갖추고 있습니다.
           </motion.p>
         </motion.div>
 

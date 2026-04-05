@@ -46,7 +46,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-white/60">
               <li>전화: 031-571-9550 / 010-9615-5640</li>
               <li>이메일: sjin5640@daum.net</li>
-              <li>주소: 경기도 구리시 갈매순환로 166번길 45, 구리갈매아너시티 지하2층 BH232~235호</li>
+              <li>주소: 경기도 구리시 갈매순환로 166번길 45,<br className="sm:hidden" />구리갈매아너시티 지하2층 BH232~235호</li>
             </ul>
           </div>
         </div>
