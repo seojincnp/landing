@@ -16,6 +16,27 @@
   --font-sans: var(--font-geist-sans);
 }
 
+/* 히어로 배경 그라디언트 시프트 */
+.hero-gradient {
+  background: linear-gradient(
+    -45deg,
+    #1e3a5f,
+    #3F6AA1,
+    #4a80b8,
+    #2c5580
+  );
+  background-size: 300% 300%;
+  animation: hero-gradient-shift 16s ease infinite;
+}
+
+@keyframes hero-gradient-shift {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
 html {
   scroll-behavior: smooth;
 }
