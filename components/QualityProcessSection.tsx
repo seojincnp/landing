@@ -130,14 +130,14 @@ function StepCard({ item }: { item: (typeof steps)[number] }) {
   return (
     <div className="relative bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 h-full border border-gray-100/80 overflow-hidden">
       {/* 아이콘 오버레이 */}
-      <div className="absolute right-2 top-0 w-28 h-28 text-primary/[0.07] pointer-events-none">
+      <div className="absolute -right-3 -top-3 w-24 h-24 text-primary/10 pointer-events-none">
         <div className="w-full h-full [&>svg]:w-full [&>svg]:h-full">
           {item.icon}
         </div>
       </div>
 
       {/* 넘버 */}
-      <div className="w-11 h-11 bg-primary text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-md shadow-primary/25 shrink-0 mb-4">
+      <div className="w-10 h-10 bg-primary text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-md shadow-primary/25 shrink-0 mb-3">
         {item.step}
       </div>
 
