@@ -54,62 +54,32 @@ export default function HeroSection() {
             initial="hidden"
             animate="visible"
           >
-            {/* 라벨 */}
-            <motion.span
-              variants={fadeUp}
-              className="inline-block text-md font-medium text-white/60 tracking-widest uppercase mb-3"
-            >
-              (주)서진씨앤피
-            </motion.span>
-
             {/* 메인 타이틀 */}
             <motion.h1
               variants={fadeUp}
-              className="text-3xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-8"
+              className="text-3xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-3"
             >
-              결과로 증명하는 라벨 파트너
+              제품의 가치를 완성하는 기술과 신뢰
             </motion.h1>
 
-            {/* 인용문 */}
-            <motion.blockquote
+            {/* 서브 카피 */}
+            <motion.p
               variants={fadeUp}
-              className="relative pl-5 border-l-2 border-white/30 mb-8"
+              className="text-lg sm:text-xl text-white/60 leading-relaxed italic mb-8"
             >
-              <p className="text-lg sm:text-xl text-white/90 leading-relaxed italic">
-                &ldquo;브랜드의 가치를 완성하는 디테일,
-                <br />
-                그 차이를 만들어냅니다.&rdquo;
-              </p>
-            </motion.blockquote>
+              브랜드의 가치를 완성하는 디테일, 그 차이를 만들어냅니다.
+            </motion.p>
 
-            {/* 구분선 */}
-            <motion.div
-              variants={fadeUp}
-              className="w-full h-px bg-white/20 mb-7"
-            />
-
-            {/* 체크리스트 */}
-            <motion.ul
-              variants={stagger}
-              className="space-y-3 mb-9"
-            >
-              {[
-                "28년+ 전 공정 통합 운영 (기획 → 인쇄 → 후가공 → 품질)",
-                "식품·화장품·의약품 다업종 맞춤 대응",
-                "대량 생산부터 정밀 프로젝트까지 유연 생산",
-              ].map((text) => (
-                <motion.li
-                  key={text}
-                  variants={fadeUp}
-                  className="flex items-start gap-1.5 sm:gap-3 text-white/90 text-sm sm:text-base"
-                >
-                  <svg className="w-5 h-5 text-white/50 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span style={{ wordBreak: "keep-all" }}>{text}</span>
-                </motion.li>
-              ))}
-            </motion.ul>
+            {/* 소개글 */}
+            <motion.p variants={fadeUp} className="text-white/80 leading-relaxed mb-4" style={{ wordBreak: "keep-all" }}>
+              (주)서진씨앤피는 1996년 설립 이래, 단순한 인쇄를 넘어 고객사의 브랜드 경쟁력을 강화하는 라벨 전문 기업입니다.
+            </motion.p>
+            <motion.p variants={fadeUp} className="text-white/80 leading-relaxed mb-4" style={{ wordBreak: "keep-all" }}>
+              제품의 첫인상을 결정짓는 라벨은 브랜드 아이덴티티를 전달하는 핵심 요소입니다. 저희는 디자인 기획부터 인쇄, 후가공, 품질 관리까지 전 공정을 통합 운영하며, 일관된 품질과 높은 완성도를 보장합니다.
+            </motion.p>
+            <motion.p variants={fadeUp} className="text-white/80 leading-relaxed mb-9" style={{ wordBreak: "keep-all" }}>
+              식품, 화장품, 의약품, 산업용 제품 등 다양한 분야에서 축적된 경험을 바탕으로 각 산업의 특성과 규격에 부합하는 맞춤형 라벨을 제공하고 있으며, 앞으로도 신뢰를 기반으로 고객사의 브랜드 가치를 높이는 라벨 솔루션을 만들어 내겠습니다.
+            </motion.p>
 
             {/* CTA 버튼 */}
             <motion.div
