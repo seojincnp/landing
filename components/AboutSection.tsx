@@ -76,7 +76,7 @@ export default function AboutSection() {
     <section id="about" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 회사소개 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -87,22 +87,16 @@ export default function AboutSection() {
               About Us
             </motion.span>
             <motion.h2 variants={fadeInUp} className="mt-2 text-2xl sm:text-4xl font-bold text-text">
-              제품의 가치를 완성하는 기술과 신뢰
+              결과로 증명하는 라벨 파트너
             </motion.h2>
-            <motion.p variants={fadeInUp} className="mt-5 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
-              (주)서진씨앤피는 1996년 설립 이래, 단순한 인쇄를 넘어 고객사의 브랜드 경쟁력을 강화하는 라벨 전문 기업입니다. 브랜드의 가치를 완성하는 디테일, 그 차이를 만들어냅니다.
+            <motion.p variants={fadeInUp} className="mt-6 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
+              (주)서진씨앤피는 1996년 설립 이래, 단순한 인쇄를 넘어 고객사의 브랜드 경쟁력을 강화하는 라벨 전문 기업입니다.
             </motion.p>
-            <motion.p variants={fadeInUp} className="mt-3 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
+            <motion.p variants={fadeInUp} className="mt-6 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
               제품의 첫인상을 결정짓는 라벨은 브랜드 아이덴티티를 전달하는 핵심 요소입니다. 저희는 디자인 기획부터 인쇄, 후가공, 품질 관리까지 전 공정을 통합 운영하며, 일관된 품질과 높은 완성도를 보장합니다.
             </motion.p>
-            <motion.p variants={fadeInUp} className="mt-3 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
-              식품, 화장품, 의약품, 산업용 제품 등 다양한 분야에서 축적된 경험을 바탕으로 각 산업의 특성과 규격에 부합하는 맞춤형 라벨을 제공하고 있으며, 고도화된 인쇄 기술과 안정적인 생산 시스템을 통해 대량 생산부터 정밀 프로젝트까지 유연하게 대응합니다.
-            </motion.p>
-            <motion.p variants={fadeInUp} className="mt-3 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
-              현재도 국내 주요 식품·화장품 기업과 지속적인 파트너십을 유지하고 있으며, 앞으로도 신뢰를 기반으로 고객사의 브랜드 가치를 높이는 라벨 솔루션을 제공하겠습니다.
-            </motion.p>
-            <motion.p variants={fadeInUp} className="mt-4 text-text font-medium">
-              대표이사 채기옥
+            <motion.p variants={fadeInUp} className="mt-6 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
+              식품, 화장품, 의약품, 산업용 제품 등 다양한 분야에서 축적된 경험을 바탕으로 각 산업의 특성과 규격에 부합하는 맞춤형 라벨을 제공하고 있으며, 앞으로도 신뢰를 기반으로 고객사의 브랜드 가치를 높이는 라벨 솔루션을 만들어 내겠습니다.
             </motion.p>
           </motion.div>
 

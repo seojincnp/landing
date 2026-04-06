@@ -54,20 +54,12 @@ export default function HeroSection() {
             initial="hidden"
             animate="visible"
           >
-            {/* 라벨 */}
-            <motion.span
-              variants={fadeUp}
-              className="inline-block text-md font-medium text-white/60 tracking-widest uppercase mb-3"
-            >
-              (주)서진씨앤피
-            </motion.span>
-
             {/* 메인 타이틀 */}
             <motion.h1
               variants={fadeUp}
               className="text-3xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-8"
             >
-              결과로 증명하는 라벨 파트너
+              제품의 가치를 완성하는 기술과 신뢰
             </motion.h1>
 
             {/* 인용문 */}
