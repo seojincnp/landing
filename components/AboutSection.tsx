@@ -112,14 +112,14 @@ export default function AboutSection() {
               <motion.div
                 key={item.title}
                 variants={i % 2 === 0 ? fadeInLeft : fadeInRight}
-                className="relative bg-surface border border-gray-100 p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow overflow-hidden"
+                className="relative bg-surface border border-gray-100 p-5 rounded-2xl shadow-md hover:shadow-lg transition-shadow overflow-hidden"
               >
                 {/* 배경 넘버 */}
                 <span className="absolute -top-2 -right-2 text-[80px] font-black text-primary/[0.06] leading-none select-none pointer-events-none">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div className="relative">
-                  <div className="w-11 h-11 bg-primary text-white rounded-xl flex items-center justify-center mb-4 shadow-md shadow-primary/25">
+                  <div className="w-10 h-10 bg-primary text-white rounded-xl flex items-center justify-center mb-3 shadow-md shadow-primary/25">
                     {item.icon}
                   </div>
                   <h3 className="text-base font-bold text-text mb-2">

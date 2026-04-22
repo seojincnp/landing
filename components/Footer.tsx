@@ -7,9 +7,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4">㈜서진씨엔피</h3>
             <p className="text-white/60 text-sm leading-relaxed">
-              귀사의 제품을 더 빛나게 할
+              대표: 채기옥
               <br />
-              최적의 라벨 솔루션 전문기업
+              사업자등록번호: 592-81-01486
             </p>
           </div>
 
@@ -44,7 +44,8 @@ export default function Footer() {
               연락처
             </h3>
             <ul className="space-y-2 text-sm text-white/60">
-              <li>전화: 031-571-9550 / 010-9615-5640</li>
+              <li>전화: 031-571-9550 ~ 9551</li>
+              <li>FAX: 031-513-9555</li>
               <li>이메일: sjin5640@daum.net</li>
               <li>주소: 경기도 구리시 갈매순환로 166번길 45,<br className="sm:hidden" />구리갈매아너시티 지하2층 BH232~235호</li>
             </ul>

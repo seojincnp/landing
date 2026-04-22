@@ -90,7 +90,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-text">전화</p>
-                  <p className="text-text-light">031-571-9550 / 010-9615-5640</p>
+                  <p className="text-text-light">031-571-9550 ~ 9551</p>
                 </div>
               </motion.div>
 
