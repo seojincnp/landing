@@ -2,15 +2,15 @@ import BlurFade from "@/components/BlurFade";
 import GridPattern from "@/components/GridPattern";
 import NumberTicker from "@/components/NumberTicker";
 import ShimmerButton from "@/components/ShimmerButton";
+import TextAnimate from "@/components/TextAnimate";
 import HeroCarousel from "@/components/HeroCarousel";
 
 const FOUNDED_YEAR = 1996;
 const STEP = 0.05;
 
-const checklist = [
-  "전 공정 통합 운영 (기획 → 인쇄 → 후가공 → 품질)",
-  "식품·화장품·의약품 다업종 맞춤 대응",
-  "대량 생산부터 정밀 프로젝트까지 유연 생산",
+const paragraphs = [
+  ["라벨의 기획부터 인쇄, 후가공, 품질관리까지", "서진씨앤피가 한 곳에서 책임집니다."],
+  ["축적된 인쇄 기술과 생산 경험으로", "제품의 완성도를 높이는 라벨을 만듭니다."],
 ];
 
 export default function HeroSection() {
@@ -21,8 +21,9 @@ export default function HeroSection() {
     { value: 10, unit: "색", label: "다색 인쇄 대응" },
   ];
 
-  // 좌측 요소: 제목, 인용문, 구분선, 체크리스트 3줄, CTA 순서로 0.05초씩 지연
-  const ctaDelay = STEP * (3 + checklist.length);
+  // 제목 단어가 먼저 올라오고, 문단 2개, CTA, 수치 띠 순서로 0.05초씩 지연
+  const paragraphDelay = STEP * 3;
+  const ctaDelay = paragraphDelay + STEP * paragraphs.length;
   const statsDelay = ctaDelay + STEP;
 
   return (
@@ -42,41 +43,33 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* 텍스트 영역 */}
           <div>
-            <BlurFade delay={0}>
-              <h1 className="text-3xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-8">
-                제품의 가치를 완성하는 기술과 신뢰
-              </h1>
-            </BlurFade>
+            <TextAnimate
+              as="h1"
+              by="word"
+              animation="blurInUp"
+              startOnView={false}
+              duration={0.5}
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-8"
+              style={{ wordBreak: "keep-all" }}
+            >
+              좋은 제품은 좋은 라벨에서 시작됩니다.
+            </TextAnimate>
 
-            <BlurFade delay={STEP}>
-              <blockquote className="relative pl-5 border-l-2 border-white/30 mb-8">
-                <p className="text-lg sm:text-xl text-white/90 leading-relaxed italic">
-                  &ldquo;브랜드의 가치를 완성하는 디테일,
-                  <br />
-                  그 차이를 만들어냅니다.&rdquo;
-                </p>
-              </blockquote>
-            </BlurFade>
-
-            <BlurFade delay={STEP * 2}>
-              <div className="w-full h-px bg-white/20 mb-7" />
-            </BlurFade>
-
-            <ul className="space-y-3 mb-9">
-              {checklist.map((text, i) => (
-                <li key={text}>
-                  <BlurFade
-                    delay={STEP * (3 + i)}
-                    className="flex items-start gap-1.5 sm:gap-3 text-white/90 text-sm sm:text-base"
+            <div className="space-y-4 mb-10">
+              {paragraphs.map(([first, second], i) => (
+                <BlurFade key={first} delay={paragraphDelay + STEP * i}>
+                  <p
+                    className="text-base sm:text-lg text-white/85 leading-relaxed"
+                    style={{ wordBreak: "keep-all" }}
                   >
-                    <svg className="w-5 h-5 text-white/50 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span style={{ wordBreak: "keep-all" }}>{text}</span>
-                  </BlurFade>
-                </li>
+                    {first}
+                    {/* 원문 줄바꿈은 넓은 화면에서만 유지 */}
+                    <br className="hidden sm:block" />{" "}
+                    {second}
+                  </p>
+                </BlurFade>
               ))}
-            </ul>
+            </div>
 
             {/* CTA: 견적 문의가 주요 동작 */}
             <BlurFade
