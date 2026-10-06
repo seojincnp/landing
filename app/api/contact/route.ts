@@ -8,6 +8,16 @@ interface ContactFormData {
   message: string;
 }
 
+// 사용자 입력이 메일 HTML에 그대로 들어가므로 태그와 링크 주입을 막는다
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function POST(request: Request) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
@@ -32,6 +42,13 @@ export async function POST(request: Request) {
       }
     }
 
+    const safe = {
+      name: escapeHtml(name),
+      phone: escapeHtml(phone),
+      email: email ? escapeHtml(email) : "",
+      message: escapeHtml(message),
+    };
+
     const toEmail = process.env.CONTACT_EMAIL_TO || "sjin5640@daum.net";
     const ccEmail = process.env.CONTACT_EMAIL_CC;
 
@@ -51,16 +68,16 @@ export async function POST(request: Request) {
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 14px; width: 120px;">이름 / 회사명</td>
-                <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b; font-weight: 500;">${name}</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b; font-weight: 500;">${safe.name}</td>
               </tr>
               <tr>
                 <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 14px;">연락처</td>
-                <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${phone}</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${safe.phone}</td>
               </tr>
               ${email ? `<tr>
                 <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 14px;">이메일</td>
                 <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0;">
-                  <a href="mailto:${email}" style="color: #3B82F6; text-decoration: none;">${email}</a>
+                  <a href="mailto:${safe.email}" style="color: #3B82F6; text-decoration: none;">${safe.email}</a>
                 </td>
               </tr>` : ""}
             </table>
@@ -68,7 +85,7 @@ export async function POST(request: Request) {
             <div style="margin-top: 24px;">
               <p style="color: #64748b; font-size: 14px; margin-bottom: 8px;">문의 내용</p>
               <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                <p style="color: #1e293b; line-height: 1.6; margin: 0; white-space: pre-wrap;">${message}</p>
+                <p style="color: #1e293b; line-height: 1.6; margin: 0; white-space: pre-wrap;">${safe.message}</p>
               </div>
             </div>
 
