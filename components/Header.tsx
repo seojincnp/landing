@@ -2,15 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-
-const navLinks = [
-  { href: "#hero", label: "홈" },
-  { href: "#about", label: "회사소개" },
-  { href: "#portfolio", label: "주요 거래선" },
-  { href: "#equipment", label: "보유 설비" },
-  { href: "#process", label: "품질 관리" },
-  { href: "#contact", label: "문의하기" },
-];
+import { sections } from "@/lib/sections";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -32,13 +24,13 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {sections.map((section) => (
               <a
-                key={link.href}
-                href={link.href}
+                key={section.id}
+                href={`#${section.id}`}
                 className="font-medium text-text-light hover:text-primary transition-colors"
               >
-                {link.label}
+                {section.label}
               </a>
             ))}
             <div className="flex items-center gap-2 ml-2 pl-4 border-l border-gray-200">
@@ -89,14 +81,14 @@ export default function Header() {
       {/* Mobile Nav */}
       {mobileOpen && (
         <nav className="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-3">
-          {navLinks.map((link) => (
+          {sections.map((section) => (
             <a
-              key={link.href}
-              href={link.href}
+              key={section.id}
+              href={`#${section.id}`}
               onClick={() => setMobileOpen(false)}
               className="block text-base font-medium text-text-light hover:text-primary transition-colors"
             >
-              {link.label}
+              {section.label}
             </a>
           ))}
           <div className="flex items-center gap-3 pt-3 border-t border-gray-100">

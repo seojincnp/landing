@@ -98,7 +98,7 @@ export default function HeroSection() {
                 href="#portfolio"
                 className="w-full sm:w-auto bg-white/10 text-white border border-white/30 px-8 py-3.5 rounded-lg text-base font-semibold hover:bg-white/20 transition-colors text-center"
               >
-                생산 사례 보기
+                제작사례 보기
               </a>
             </BlurFade>
           </div>

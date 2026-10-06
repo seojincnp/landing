@@ -1,3 +1,5 @@
+import { sections } from "@/lib/sections";
+
 export default function Footer() {
   return (
     <footer className="bg-primary text-white">
@@ -19,22 +21,18 @@ export default function Footer() {
               바로가기
             </h3>
             <ul className="space-y-2">
-              {[
-                { href: "#about", label: "회사소개" },
-                { href: "#products", label: "제안 품목" },
-                { href: "#portfolio", label: "주요 거래선" },
-                { href: "#equipment", label: "보유 설비" },
-                { href: "#contact", label: "문의하기" },
-              ].map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-white/60 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              {sections
+                .filter((section) => section.id !== "hero")
+                .map((section) => (
+                  <li key={section.id}>
+                    <a
+                      href={`#${section.id}`}
+                      className="text-sm text-white/60 hover:text-white transition-colors"
+                    >
+                      {section.label}
+                    </a>
+                  </li>
+                ))}
             </ul>
           </div>
 
