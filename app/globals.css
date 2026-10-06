@@ -13,10 +13,12 @@
   --color-text: #1a1a2e;
   --color-text-light: #5a6a7a;
   --color-white: #ffffff;
+  --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
+  --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
 
-/* 히어로 배경 그라디언트 시프트 */
+/* 히어로 배경. 그리드와 다른 모션이 있어 그라디언트는 움직이지 않게 둔다 */
 .hero-gradient {
   background: linear-gradient(
     -45deg,
@@ -25,20 +27,40 @@
     #4a80b8,
     #2c5580
   );
-  background-size: 300% 300%;
-  animation: hero-gradient-shift 16s ease infinite;
 }
 
-@keyframes hero-gradient-shift {
-  0% { background-position: 0% 50%; }
-  25% { background-position: 100% 0%; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0% 100%; }
-  100% { background-position: 0% 50%; }
+/* Magic UI ShimmerButton */
+@keyframes shimmer-slide {
+  to {
+    transform: translate(calc(100cqw - 100%), 0);
+  }
+}
+
+@keyframes spin-around {
+  0% {
+    transform: translateZ(0) rotate(0);
+  }
+  15%,
+  35% {
+    transform: translateZ(0) rotate(90deg);
+  }
+  65%,
+  85% {
+    transform: translateZ(0) rotate(270deg);
+  }
+  100% {
+    transform: translateZ(0) rotate(360deg);
+  }
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
