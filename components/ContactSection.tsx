@@ -70,7 +70,7 @@ export default function ContactSection() {
             문의하기
           </motion.h2>
           <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
-            귀사의 제품에는 어떤 라벨이 필요합니까?
+            귀사의 제품에는 어떤 라벨이 필요하신가요?
           </motion.p>
         </motion.div>
 
