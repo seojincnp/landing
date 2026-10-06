@@ -77,7 +77,7 @@ export default function AboutSection() {
     <section id="about" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="text-center mb-12 lg:mb-16"
+          className="text-center mb-10 lg:mb-12"
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
@@ -87,53 +87,113 @@ export default function AboutSection() {
             About Us
           </motion.span>
           <motion.h2 variants={fadeInUp} className="mt-2 text-2xl sm:text-4xl font-bold text-text">
-            회사소개
+            회사 연혁
           </motion.h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* 회사 연혁: 소개글이 있던 자리. PC도 모바일과 같은 세로 타임라인 */}
-          <div>
-            <motion.h3
-              className="text-xl font-bold text-text mb-6"
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              variants={fadeInUp}
-            >
-              회사 연혁
-            </motion.h3>
-
-            <motion.div
-              className="pl-3"
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              variants={staggerContainer(0.08)}
-            >
-              {history.map((item, i) => (
-                <motion.div key={item.year} className="flex gap-4" variants={fadeInLeft}>
-                  {/* 좌측: 도트 + 라인 */}
-                  <div className="flex flex-col items-center shrink-0">
-                    <div className="w-3 h-3 bg-primary rounded-full ring-4 ring-white shrink-0 mt-1" />
-                    <div className={`w-px flex-1 ${i < history.length - 1 ? "bg-primary/20" : "bg-transparent"}`} />
-                  </div>
-                  {/* 우측: 텍스트 */}
-                  <div className="pb-5 lg:pb-6">
-                    <span className="text-primary font-bold text-sm lg:text-base">{item.year}</span>
-                    <p className="text-text-light text-sm lg:text-base leading-snug whitespace-pre-line mt-0.5" style={{ wordBreak: "keep-all" }}>{item.event}</p>
-                    {item.sub && (
-                      <p className="text-text-light/60 text-xs lg:text-sm mt-0.5">{item.sub}</p>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* 강점 카드: 연혁이 더 길어서 PC에서는 스크롤 동안 고정 */}
+        {/* 회사 연혁: 소개글이 있던 섹션 상단으로 이동 */}
+        <div>
+          {/* 모바일: 세로 타임라인 */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:sticky lg:top-28"
+            className="lg:hidden pl-3"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer(0.08)}
+          >
+            {history.map((item, i) => (
+              <motion.div key={item.year} className="flex gap-4" variants={fadeInLeft}>
+                {/* 좌측: 도트 + 라인 */}
+                <div className="flex flex-col items-center shrink-0">
+                  <div className="w-3 h-3 bg-primary rounded-full ring-4 ring-white shrink-0 mt-1" />
+                  <div className={`w-px flex-1 ${i < history.length - 1 ? "bg-primary/20" : "bg-transparent"}`} />
+                </div>
+                {/* 우측: 텍스트 */}
+                <div className="pb-5">
+                  <span className="text-primary font-bold text-sm">{item.year}</span>
+                  <p className="text-text-light text-sm leading-snug whitespace-pre-line mt-0.5" style={{ wordBreak: "keep-all" }}>{item.event}</p>
+                  {item.sub && (
+                    <p className="text-text-light/60 text-xs mt-0.5">{item.sub}</p>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+            {/* 하단 쉐브론 */}
+            <div className="flex flex-col items-center ml-[3px] gap-0.5">
+              <svg width="20" height="12" viewBox="0 0 24 14" fill="none" className="text-primary/20">
+                <path d="M2 2l10 10L22 2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <svg width="20" height="12" viewBox="0 0 24 14" fill="none" className="text-primary/35">
+                <path d="M2 2l10 10L22 2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <svg width="20" height="12" viewBox="0 0 24 14" fill="none" className="text-primary/50">
+                <path d="M2 2l10 10L22 2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </motion.div>
+
+          {/* PC: 가로 타임라인 */}
+          <motion.div
+            className="hidden lg:block max-w-6xl mx-auto overflow-visible"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer(0.08, 0.2)}
+          >
+            <div className="relative flex items-center overflow-visible">
+              <div className="relative grid grid-cols-11 overflow-visible flex-1">
+                <div className="absolute top-1/2 left-[calc(100%/22)] right-0 h-px bg-primary/20 -translate-y-px" />
+
+                {history.map((item, i) => {
+                  const isTop = i % 2 === 0;
+                  return (
+                    <motion.div
+                      key={item.year}
+                      variants={fadeInUp}
+                      className="group relative flex flex-col items-center cursor-default overflow-visible"
+                    >
+                      <div className={`flex flex-col items-center justify-end h-24 pb-2 overflow-visible transition-transform duration-300 group-hover:scale-105 ${isTop ? "opacity-100" : "opacity-0"}`}>
+                        <span className="text-primary font-bold text-sm mb-0.5 whitespace-nowrap transition-all duration-300 group-hover:text-base">{isTop ? item.year : ""}</span>
+                        <p className="text-text-light text-xs leading-snug text-center whitespace-pre-line min-w-[160px] transition-colors duration-300 group-hover:text-text">{isTop ? item.event : ""}</p>
+                        {isTop && item.sub && (
+                          <p className="text-text-light/60 text-xs leading-snug text-center whitespace-pre-line min-w-[120px] mt-0.5 transition-colors duration-300 group-hover:text-text-light">{item.sub}</p>
+                        )}
+                      </div>
+
+                      <div className="w-3 h-3 bg-primary rounded-full ring-4 ring-white z-10 my-1 transition-all duration-300 group-hover:scale-150 group-hover:ring-primary/20" />
+
+                      <div className={`flex flex-col items-center justify-start h-24 pt-2 overflow-visible transition-transform duration-300 group-hover:scale-105 ${!isTop ? "opacity-100" : "opacity-0"}`}>
+                        <span className="text-primary font-bold text-sm mb-0.5 whitespace-nowrap transition-all duration-300 group-hover:text-base">{!isTop ? item.year : ""}</span>
+                        <p className="text-text-light text-xs leading-snug text-center whitespace-pre-line min-w-[160px] transition-colors duration-300 group-hover:text-text">{!isTop ? item.event : ""}</p>
+                        {!isTop && item.sub && (
+                          <p className="text-text-light/60 text-xs leading-snug text-center whitespace-pre-line min-w-[120px] mt-0.5 transition-colors duration-300 group-hover:text-text-light">{item.sub}</p>
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <div className="shrink-0 ml-2 flex items-center gap-0.5">
+                <svg width="12" height="20" viewBox="0 0 14 24" fill="none" className="text-primary/20">
+                  <path d="M2 2l10 10L2 22" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <svg width="12" height="20" viewBox="0 0 14 24" fill="none" className="text-primary/35">
+                  <path d="M2 2l10 10L2 22" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <svg width="12" height="20" viewBox="0 0 14 24" fill="none" className="text-primary/50">
+                  <path d="M2 2l10 10L2 22" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* 강점 카드: 연혁 아래 한 줄 */}
+        <div className="mt-16 lg:mt-20">
+          {/* 강점 카드 */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
