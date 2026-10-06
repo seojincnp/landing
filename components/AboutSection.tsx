@@ -69,40 +69,71 @@ const history: { year: string; event: string; sub?: string }[] = [
   { year: "2015.3", event: "디지털 인쇄기(딜리) 도입" },
   { year: "2016.3", event: "HONTEC 7+1, 10+1 도입" },
   { year: "2025.6", event: "본사 및 공장 확장 이전", sub: "경기도 구리시" },
+  { year: "2026.9", event: "Hontec Flexo 10도 도입" },
 ];
 
 export default function AboutSection() {
   return (
     <section id="about" className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* 회사소개 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            variants={staggerContainer(0.12)}
-          >
-            <motion.span variants={fadeInUp} className="text-primary text-sm font-semibold tracking-wide uppercase block">
-              About Us
-            </motion.span>
-            <motion.h2 variants={fadeInUp} className="mt-2 text-2xl sm:text-4xl font-bold text-text">
-              결과로 증명하는 라벨 파트너
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="mt-6 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
-              (주)서진씨앤피는 1996년 설립 이래, 단순한 인쇄를 넘어 고객사의 브랜드 경쟁력을 강화하는 라벨 전문 기업입니다.
-            </motion.p>
-            <motion.p variants={fadeInUp} className="mt-6 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
-              제품의 첫인상을 결정짓는 라벨은 브랜드 아이덴티티를 전달하는 핵심 요소입니다. 저희는 디자인 기획부터 인쇄, 후가공, 품질 관리까지 전 공정을 통합 운영하며, 일관된 품질과 높은 완성도를 보장합니다.
-            </motion.p>
-            <motion.p variants={fadeInUp} className="mt-6 text-text-light leading-relaxed" style={{ wordBreak: "keep-all" }}>
-              식품, 화장품, 의약품, 산업용 제품 등 다양한 분야에서 축적된 경험을 바탕으로 각 산업의 특성과 규격에 부합하는 맞춤형 라벨을 제공하고 있으며, 앞으로도 신뢰를 기반으로 고객사의 브랜드 가치를 높이는 라벨 솔루션을 만들어 내겠습니다.
-            </motion.p>
-          </motion.div>
+        <motion.div
+          className="text-center mb-12 lg:mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={staggerContainer(0.1)}
+        >
+          <motion.span variants={fadeInUp} className="text-primary text-sm font-semibold tracking-wide uppercase block">
+            About Us
+          </motion.span>
+          <motion.h2 variants={fadeInUp} className="mt-2 text-2xl sm:text-4xl font-bold text-text">
+            회사소개
+          </motion.h2>
+        </motion.div>
 
-          {/* 강점 카드 */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* 회사 연혁: 소개글이 있던 자리. PC도 모바일과 같은 세로 타임라인 */}
+          <div>
+            <motion.h3
+              className="text-xl font-bold text-text mb-6"
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={fadeInUp}
+            >
+              회사 연혁
+            </motion.h3>
+
+            <motion.div
+              className="pl-3"
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={staggerContainer(0.08)}
+            >
+              {history.map((item, i) => (
+                <motion.div key={item.year} className="flex gap-4" variants={fadeInLeft}>
+                  {/* 좌측: 도트 + 라인 */}
+                  <div className="flex flex-col items-center shrink-0">
+                    <div className="w-3 h-3 bg-primary rounded-full ring-4 ring-white shrink-0 mt-1" />
+                    <div className={`w-px flex-1 ${i < history.length - 1 ? "bg-primary/20" : "bg-transparent"}`} />
+                  </div>
+                  {/* 우측: 텍스트 */}
+                  <div className="pb-5 lg:pb-6">
+                    <span className="text-primary font-bold text-sm lg:text-base">{item.year}</span>
+                    <p className="text-text-light text-sm lg:text-base leading-snug whitespace-pre-line mt-0.5" style={{ wordBreak: "keep-all" }}>{item.event}</p>
+                    {item.sub && (
+                      <p className="text-text-light/60 text-xs lg:text-sm mt-0.5">{item.sub}</p>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* 강점 카드: 연혁이 더 길어서 PC에서는 스크롤 동안 고정 */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:sticky lg:top-28"
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
@@ -131,119 +162,6 @@ export default function AboutSection() {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-        </div>
-
-        {/* 연혁 가로 스크롤 타임라인 */}
-        <div className="mt-16 lg:mt-24">
-          <motion.div
-            className="text-center mb-5"
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            variants={fadeInUp}
-          >
-            <span className="text-primary text-sm font-semibold tracking-wide uppercase">
-              History
-            </span>
-            <h2 className="mt-2 text-2xl sm:text-4xl font-bold text-text">
-              회사 연혁
-            </h2>
-          </motion.div>
-
-          {/* 모바일: 세로 타임라인 */}
-          <motion.div
-            className="lg:hidden pl-3"
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            variants={staggerContainer(0.08)}
-          >
-            {history.map((item, i) => (
-              <motion.div key={item.year} className="flex gap-4" variants={fadeInLeft}>
-                {/* 좌측: 도트 + 라인 */}
-                <div className="flex flex-col items-center shrink-0">
-                  <div className="w-3 h-3 bg-primary rounded-full ring-4 ring-white shrink-0 mt-1" />
-                  <div className={`w-px flex-1 ${i < history.length - 1 ? "bg-primary/20" : "bg-transparent"}`} />
-                </div>
-                {/* 우측: 텍스트 */}
-                <div className="pb-5">
-                  <span className="text-primary font-bold text-sm">{item.year}</span>
-                  <p className="text-text-light text-sm leading-snug whitespace-pre-line mt-0.5" style={{ wordBreak: "keep-all" }}>{item.event}</p>
-                  {item.sub && (
-                    <p className="text-text-light/60 text-xs mt-0.5">{item.sub}</p>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-            {/* 하단 쉐브론 */}
-            <div className="flex flex-col items-center ml-[3px] gap-0.5">
-              <svg width="20" height="12" viewBox="0 0 24 14" fill="none" className="text-primary/20">
-                <path d="M2 2l10 10L22 2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <svg width="20" height="12" viewBox="0 0 24 14" fill="none" className="text-primary/35">
-                <path d="M2 2l10 10L22 2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <svg width="20" height="12" viewBox="0 0 24 14" fill="none" className="text-primary/50">
-                <path d="M2 2l10 10L22 2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-          </motion.div>
-
-          {/* PC: 가로 타임라인 */}
-          <motion.div
-            className="hidden lg:block max-w-6xl mx-auto overflow-visible"
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            variants={staggerContainer(0.08, 0.2)}
-          >
-            <div className="relative flex items-center overflow-visible">
-              <div className="relative grid grid-cols-10 overflow-visible flex-1">
-                <div className="absolute top-1/2 left-[5%] right-0 h-px bg-primary/20 -translate-y-px" />
-
-                {history.map((item, i) => {
-                  const isTop = i % 2 === 0;
-                  return (
-                    <motion.div
-                      key={item.year}
-                      variants={fadeInUp}
-                      className="group relative flex flex-col items-center cursor-default overflow-visible"
-                    >
-                      <div className={`flex flex-col items-center justify-end h-24 pb-2 overflow-visible transition-transform duration-300 group-hover:scale-105 ${isTop ? "opacity-100" : "opacity-0"}`}>
-                        <span className="text-primary font-bold text-sm mb-0.5 whitespace-nowrap transition-all duration-300 group-hover:text-base">{isTop ? item.year : ""}</span>
-                        <p className="text-text-light text-xs leading-snug text-center whitespace-pre-line min-w-[160px] transition-colors duration-300 group-hover:text-text">{isTop ? item.event : ""}</p>
-                        {isTop && item.sub && (
-                          <p className="text-text-light/60 text-xs leading-snug text-center whitespace-pre-line min-w-[120px] mt-0.5 transition-colors duration-300 group-hover:text-text-light">{item.sub}</p>
-                        )}
-                      </div>
-
-                      <div className="w-3 h-3 bg-primary rounded-full ring-4 ring-white z-10 my-1 transition-all duration-300 group-hover:scale-150 group-hover:ring-primary/20" />
-
-                      <div className={`flex flex-col items-center justify-start h-24 pt-2 overflow-visible transition-transform duration-300 group-hover:scale-105 ${!isTop ? "opacity-100" : "opacity-0"}`}>
-                        <span className="text-primary font-bold text-sm mb-0.5 whitespace-nowrap transition-all duration-300 group-hover:text-base">{!isTop ? item.year : ""}</span>
-                        <p className="text-text-light text-xs leading-snug text-center whitespace-pre-line min-w-[160px] transition-colors duration-300 group-hover:text-text">{!isTop ? item.event : ""}</p>
-                        {!isTop && item.sub && (
-                          <p className="text-text-light/60 text-xs leading-snug text-center whitespace-pre-line min-w-[120px] mt-0.5 transition-colors duration-300 group-hover:text-text-light">{item.sub}</p>
-                        )}
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-
-              <div className="shrink-0 ml-2 flex items-center gap-0.5">
-                <svg width="12" height="20" viewBox="0 0 14 24" fill="none" className="text-primary/20">
-                  <path d="M2 2l10 10L2 22" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <svg width="12" height="20" viewBox="0 0 14 24" fill="none" className="text-primary/35">
-                  <path d="M2 2l10 10L2 22" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <svg width="12" height="20" viewBox="0 0 14 24" fill="none" className="text-primary/50">
-                  <path d="M2 2l10 10L2 22" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>
