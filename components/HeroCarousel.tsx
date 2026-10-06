@@ -4,12 +4,13 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
+// 첫 장은 LCP와 공유 이미지(app/opengraph-image.jpg)의 원본이라 밝은 전경 사진을 둔다
 const heroImages = [
-  "/hero/hero-1.jpg",
-  "/hero/hero-2.jpg",
-  "/hero/hero-3.jpg",
-  "/hero/hero-4.jpg",
-  "/hero/hero-5.jpg",
+  { src: "/hero/factory-1.jpg", alt: "서진씨앤피 공장의 다색 라벨 인쇄 라인 전경" },
+  { src: "/hero/factory-2.jpg", alt: "로타리 라벨 인쇄기" },
+  { src: "/hero/factory-3.jpg", alt: "인쇄 유닛을 지나는 라벨 원단" },
+  { src: "/hero/factory-4.jpg", alt: "다색 로타리 인쇄 라인" },
+  { src: "/hero/factory-5.jpg", alt: "라벨 후가공 설비" },
 ];
 
 export default function HeroCarousel() {
@@ -38,8 +39,8 @@ export default function HeroCarousel() {
           className="absolute inset-0"
         >
           <Image
-            src={heroImages[current]}
-            alt={`서진씨엔피 공장 ${current + 1}`}
+            src={heroImages[current].src}
+            alt={heroImages[current].alt}
             fill
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"
