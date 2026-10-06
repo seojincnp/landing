@@ -9,41 +9,27 @@ import {
   viewportOnce,
 } from "@/lib/motions";
 
-const categories = ["생활용품", "식품", "의약품", "화장품", "RFID"] as const;
-type Category = (typeof categories)[number];
+// 사진을 추가할 때는 public/portfolio/{dir}/ 에 이어지는 번호로 넣고 count만 늘린다
+const portfolioConfig = [
+  { category: "식품", dir: "food", count: 11 },
+  { category: "화장품", dir: "cosmetic", count: 8 },
+  { category: "생활용품", dir: "daily", count: 9 },
+  { category: "의약품", dir: "pharma", count: 6 },
+  { category: "RFID", dir: "rfid", count: 1 },
+] as const;
 
-const portfolioItems = [
-  // 생활용품 (9장)
-  ...Array.from({ length: 9 }, (_, i) => ({
-    id: i + 1,
-    category: "생활용품" as Category,
-    image: `/portfolio/daily/${i + 1}.jpg`,
-    alt: `생활용품 라벨 ${i + 1}`,
+type Category = (typeof portfolioConfig)[number]["category"];
+
+const categories = portfolioConfig.map((c) => c.category);
+
+const portfolioItems = portfolioConfig.flatMap(({ category, dir, count }) =>
+  Array.from({ length: count }, (_, i) => ({
+    id: `${dir}-${i + 1}`,
+    category: category as Category,
+    image: `/portfolio/${dir}/${i + 1}.jpg`,
+    alt: `${category} 라벨 ${i + 1}`,
   })),
-  // 식품 (11장)
-  ...Array.from({ length: 11 }, (_, i) => ({
-    id: 100 + i,
-    category: "식품" as Category,
-    image: `/portfolio/food/${i + 1}.jpg`,
-    alt: `식품 라벨 ${i + 1}`,
-  })),
-  // 의약품 (6장)
-  ...Array.from({ length: 6 }, (_, i) => ({
-    id: 200 + i,
-    category: "의약품" as Category,
-    image: `/portfolio/pharma/${i + 1}.jpg`,
-    alt: `의약품 라벨 ${i + 1}`,
-  })),
-  // 화장품 (8장)
-  ...Array.from({ length: 8 }, (_, i) => ({
-    id: 300 + i,
-    category: "화장품" as Category,
-    image: `/portfolio/cosmetic/${i + 1}.jpg`,
-    alt: `화장품 라벨 ${i + 1}`,
-  })),
-  // RFID (1장)
-  { id: 400, category: "RFID" as Category, image: "/portfolio/rfid/1.jpg", alt: "RFID 라벨" },
-];
+);
 
 const CLIENT_LOGOS = [
   { name: "세븐일레븐", src: "/client/7eleven.png" },
@@ -63,7 +49,7 @@ const CLIENT_LOGOS = [
 const REPEATED_LOGOS = [...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS];
 
 export default function PortfolioSection() {
-  const [activeCategory, setActiveCategory] = useState<Category>("생활용품");
+  const [activeCategory, setActiveCategory] = useState<Category>(categories[0]);
 
   const filteredItems = portfolioItems.filter((item) => item.category === activeCategory);
 
@@ -84,7 +70,7 @@ export default function PortfolioSection() {
             제작사례
           </motion.h2>
           <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
-            다양한 산업 분야의 고객사에 라벨을 공급하고 있습니다.
+            다양한 브랜드가 선택한 라벨 전문 파트너
           </motion.p>
         </motion.div>
 
