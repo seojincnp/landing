@@ -18,6 +18,7 @@ export default function ContactSection() {
     phone: "",
     email: "",
     message: "",
+    website: "",
   });
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -45,7 +46,7 @@ export default function ContactSection() {
       }
 
       setStatus("success");
-      setFormData({ name: "", phone: "", email: "", message: "" });
+      setFormData({ name: "", phone: "", email: "", message: "", website: "" });
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "전송에 실패했습니다.");
@@ -166,6 +167,18 @@ export default function ContactSection() {
               </div>
             ) : (
               <form className="flex flex-col gap-4 flex-1" onSubmit={handleSubmit}>
+                {/* 봇 차단용 허니팟. 화면과 스크린리더 모두에서 숨김 */}
+                <div className="hidden" aria-hidden="true">
+                  <label htmlFor="website">웹사이트</label>
+                  <input
+                    type="text"
+                    id="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-text mb-1.5">
                     이름 / 회사명 <span className="text-red-400">*</span>
@@ -174,6 +187,7 @@ export default function ContactSection() {
                     type="text"
                     id="name"
                     value={formData.name}
+                    maxLength={100}
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
@@ -188,6 +202,7 @@ export default function ContactSection() {
                     type="tel"
                     id="phone"
                     value={formData.phone}
+                    maxLength={30}
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
@@ -202,6 +217,7 @@ export default function ContactSection() {
                     type="email"
                     id="email"
                     value={formData.email}
+                    maxLength={254}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
                     placeholder="example@company.com"
@@ -214,6 +230,7 @@ export default function ContactSection() {
                   <textarea
                     id="message"
                     value={formData.message}
+                    maxLength={5000}
                     onChange={handleChange}
                     required
                     className="w-full flex-1 min-h-[120px] px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors resize-none"

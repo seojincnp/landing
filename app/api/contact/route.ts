@@ -6,6 +6,33 @@ interface ContactFormData {
   phone: string;
   email: string;
   message: string;
+  website?: string;
+}
+
+const MAX_LENGTH = { name: 100, phone: 30, email: 254, message: 5000 };
+
+const RATE_LIMIT = { max: 5, windowMs: 10 * 60 * 1000 };
+// 서버리스 인스턴스마다 따로 세므로 완전한 차단은 아니다. 한 IP의 연속 발송을 줄이는 용도
+const requestLog = new Map<string, number[]>();
+
+function isRateLimited(ip: string) {
+  const now = Date.now();
+  const recent = (requestLog.get(ip) ?? []).filter(
+    (t) => now - t < RATE_LIMIT.windowMs
+  );
+  recent.push(now);
+  requestLog.set(ip, recent);
+
+  // 오래된 IP 기록이 계속 쌓이지 않게 정리
+  if (requestLog.size > 1000) {
+    for (const [key, times] of requestLog) {
+      if (times.every((t) => now - t >= RATE_LIMIT.windowMs)) {
+        requestLog.delete(key);
+      }
+    }
+  }
+
+  return recent.length > RATE_LIMIT.max;
 }
 
 // 사용자 입력이 메일 HTML에 그대로 들어가므로 태그와 링크 주입을 막는다
@@ -22,8 +49,50 @@ export async function POST(request: Request) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
+    const ip =
+      request.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
+      request.headers.get("x-real-ip") ??
+      "unknown";
+
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { error: "문의가 너무 많이 접수되었습니다. 잠시 후 다시 시도해주세요." },
+        { status: 429 }
+      );
+    }
+
     const body: ContactFormData = await request.json();
-    const { name, phone, email, message } = body;
+    const { name, phone, email, message, website } = body;
+
+    // 사람에게는 안 보이는 필드라 값이 있으면 봇. 봇이 재시도하지 않게 성공처럼 응답
+    if (website) {
+      return NextResponse.json(
+        { success: true, message: "문의가 성공적으로 접수되었습니다." },
+        { status: 200 }
+      );
+    }
+
+    const fields = { name, phone, email: email ?? "", message };
+    for (const value of Object.values(fields)) {
+      if (typeof value !== "string") {
+        return NextResponse.json(
+          { error: "잘못된 요청입니다." },
+          { status: 400 }
+        );
+      }
+    }
+
+    if (
+      name.length > MAX_LENGTH.name ||
+      phone.length > MAX_LENGTH.phone ||
+      fields.email.length > MAX_LENGTH.email ||
+      message.length > MAX_LENGTH.message
+    ) {
+      return NextResponse.json(
+        { error: "입력 내용이 너무 깁니다." },
+        { status: 400 }
+      );
+    }
 
     if (!name || !phone || !message) {
       return NextResponse.json(
