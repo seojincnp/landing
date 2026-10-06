@@ -13,7 +13,7 @@
   --color-text: #1a1a2e;
   --color-text-light: #5a6a7a;
   --color-white: #ffffff;
-  --font-sans: var(--font-geist-sans);
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
 
 /* 히어로 배경 그라디언트 시프트 */
@@ -43,5 +43,5 @@ html {
 
 body {
   color: var(--color-text);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
