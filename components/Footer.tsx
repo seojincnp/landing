@@ -9,7 +9,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4">㈜서진씨엔피</h3>
             <p className="text-white/60 text-sm leading-relaxed">
-              대표: 채기옥
+              대표: 유영란
               <br />
               사업자등록번호: 592-81-01486
             </p>

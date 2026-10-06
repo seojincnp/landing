@@ -200,7 +200,7 @@ export default function QualityProcessSection() {
             품질 관리
           </motion.h2>
           <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
-            품질, 공정, 결과까지 설계합니다.
+            한 장의 라벨이 완성될 때까지 <br className="sm:hidden" />8단계 품질관리 시스템
           </motion.p>
         </motion.div>
 

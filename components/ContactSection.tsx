@@ -70,7 +70,7 @@ export default function ContactSection() {
             문의 & 오시는 길
           </motion.h2>
           <motion.p variants={fadeInUp} className="mt-4 text-text-light max-w-2xl mx-auto">
-            라벨 인쇄에 관한 궁금한 점이 있으시면 <br className="sm:hidden" />언제든 편하게 연락해 주세요.
+            귀사의 제품에는 어떤 라벨이 필요합니까?
           </motion.p>
         </motion.div>
 
