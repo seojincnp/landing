@@ -87,7 +87,7 @@ export default function AboutSection() {
             About Us
           </motion.span>
           <motion.h2 variants={fadeInUp} className="mt-2 text-2xl sm:text-4xl font-bold text-text">
-            회사 연혁
+            회사소개
           </motion.h2>
         </motion.div>
 
