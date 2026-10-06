@@ -32,7 +32,7 @@ interface BlurFadeProps extends MotionProps {
 const getFilter = (v: Variants[string]) =>
   typeof v === "function" ? undefined : v.filter
 
-export function BlurFade({
+export default function BlurFade({
   children,
   className,
   variant,

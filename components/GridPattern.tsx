@@ -13,7 +13,7 @@ interface GridPatternProps extends React.SVGProps<SVGSVGElement> {
   [key: string]: unknown
 }
 
-export function GridPattern({
+export default function GridPattern({
   width = 40,
   height = 40,
   x = -1,

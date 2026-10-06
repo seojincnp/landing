@@ -1,7 +1,7 @@
-import { BlurFade } from "@/components/ui/blur-fade";
-import { GridPattern } from "@/components/ui/grid-pattern";
-import { NumberTicker } from "@/components/ui/number-ticker";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
+import BlurFade from "@/components/BlurFade";
+import GridPattern from "@/components/GridPattern";
+import NumberTicker from "@/components/NumberTicker";
+import ShimmerButton from "@/components/ShimmerButton";
 import HeroCarousel from "@/components/HeroCarousel";
 
 const FOUNDED_YEAR = 1996;

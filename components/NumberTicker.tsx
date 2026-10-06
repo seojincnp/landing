@@ -24,7 +24,7 @@ interface NumberTickerProps extends ComponentPropsWithoutRef<"span"> {
   decimalPlaces?: number
 }
 
-export function NumberTicker({
+export default function NumberTicker({
   value,
   startValue = 0,
   direction = "up",

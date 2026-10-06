@@ -19,7 +19,7 @@ export type ShimmerButtonProps = ShimmerOwnProps &
     | ({ href: string } & ComponentPropsWithoutRef<"a">)
   )
 
-export function ShimmerButton({
+export default function ShimmerButton({
   shimmerColor = "#ffffff",
   shimmerSize = "0.05em",
   shimmerDuration = "3s",
