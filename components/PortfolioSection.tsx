@@ -12,7 +12,7 @@ import {
 // 사진을 추가할 때는 public/portfolio/{dir}/ 에 이어지는 번호로 넣고 count만 늘린다
 const portfolioConfig = [
   { category: "식품", dir: "food", count: 11 },
-  { category: "화장품", dir: "cosmetic", count: 8 },
+  { category: "화장품", dir: "cosmetic", count: 12 },
   { category: "생활용품", dir: "daily", count: 9 },
   { category: "의약품", dir: "pharma", count: 6 },
   { category: "RFID", dir: "rfid", count: 1 },
