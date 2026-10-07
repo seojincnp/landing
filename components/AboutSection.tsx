@@ -69,7 +69,7 @@ const history: { year: string; event: string; sub?: string }[] = [
   { year: "2015.3", event: "디지털 인쇄기(딜리) 도입" },
   { year: "2016.3", event: "HONTEC 7+1, 10+1 도입" },
   { year: "2025.6", event: "본사 및 공장 확장 이전", sub: "경기도 구리시" },
-  { year: "2026.9", event: "Hontec Flexo 10도 도입" },
+  { year: "2026.9", event: "HONTEC Flexo 10도 도입" },
 ];
 
 export default function AboutSection() {
