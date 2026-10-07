@@ -8,6 +8,7 @@ import {
   viewportOnce,
 } from "@/lib/motions";
 import BlurFade from "@/components/BlurFade";
+import DotPattern from "@/components/DotPattern";
 
 // 거래처 원문마다 항목 구성이 달라서 없는 칸은 생략한다
 interface Equipment {
@@ -112,13 +113,19 @@ export default function EquipmentSection() {
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center"
             >
               <div
-                className={`relative aspect-16/10 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden ${i % 2 === 1 ? "lg:order-last" : ""}`}
+                className={`relative aspect-16/10 overflow-hidden rounded-2xl border border-primary-100/60 shadow-sm bg-linear-to-br from-white via-surface to-primary-50 ${i % 2 === 1 ? "lg:order-last" : ""}`}
               >
+                <DotPattern
+                  width={18}
+                  height={18}
+                  className="text-primary/20 [mask-image:radial-gradient(ellipse_at_center,white,transparent_75%)]"
+                />
+                {/* 설비 사진이 흰 배경 JPG라 multiply로 흰색을 배경에 녹인다 */}
                 <Image
                   src={item.image}
                   alt={item.imageAlt}
                   fill
-                  className="object-contain p-6 sm:p-10"
+                  className="object-contain p-6 sm:p-10 mix-blend-multiply"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
