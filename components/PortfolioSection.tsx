@@ -9,24 +9,27 @@ import {
   viewportOnce,
 } from "@/lib/motions";
 
-// 사진을 추가할 때는 public/portfolio/{dir}/ 에 이어지는 번호로 넣고 count만 늘린다
+// 번호를 당겨 쓰면 같은 URL에 다른 사진이 들어가 브라우저와 CDN 캐시에 예전 사진이 남는다.
+// 지운 번호는 다시 쓰지 않고 남은 파일 번호를 목록으로 둔다. 새 사진은 다음 번호로 추가
+const range = (n: number) => Array.from({ length: n }, (_, i) => i + 1);
+
 const portfolioConfig = [
-  { category: "식품", dir: "food", count: 11 },
-  { category: "화장품", dir: "cosmetic", count: 11 },
-  { category: "생활용품", dir: "daily", count: 9 },
-  { category: "의약품", dir: "pharma", count: 6 },
-  { category: "RFID", dir: "rfid", count: 1 },
+  { category: "식품", dir: "food", files: range(11) },
+  { category: "화장품", dir: "cosmetic", files: [1, 3, 5, 7, 8, 9, 10, 11] },
+  { category: "생활용품", dir: "daily", files: range(9) },
+  { category: "의약품", dir: "pharma", files: range(6) },
+  { category: "RFID", dir: "rfid", files: [1] },
 ] as const;
 
 type Category = (typeof portfolioConfig)[number]["category"];
 
 const categories = portfolioConfig.map((c) => c.category);
 
-const portfolioItems = portfolioConfig.flatMap(({ category, dir, count }) =>
-  Array.from({ length: count }, (_, i) => ({
-    id: `${dir}-${i + 1}`,
+const portfolioItems = portfolioConfig.flatMap(({ category, dir, files }) =>
+  files.map((n, i) => ({
+    id: `${dir}-${n}`,
     category: category as Category,
-    image: `/portfolio/${dir}/${i + 1}.jpg`,
+    image: `/portfolio/${dir}/${n}.jpg`,
     alt: `${category} 라벨 ${i + 1}`,
   })),
 );
