@@ -36,8 +36,8 @@ const equipment: Equipment[] = [
     tagline: "8 COLOR ROTARY",
     headline: "빠르고 정밀한 다색 로타리 인쇄",
     body: [
-      "8색 다색 인쇄를 기반으로 안정적인 색상 표현과 연속 생산이 가능한 로타리 인쇄 시스템입니다.",
-      "다양한 규격과 소재의 라벨 제작에 대응하며 대량 생산이 필요한 라벨을 효율적으로 생산합니다.",
+      "8색 다색 인쇄를 기반으로 안정적인 색상 표현과 연속 생산이 가능한\n로타리 인쇄 시스템입니다.",
+      "다양한 규격과 소재의 라벨 제작에 대응하며 대량 생산이 필요한 라벨을\n효율적으로 생산합니다.",
     ],
     specs: ["8 COLOR", "ROTARY PRINTING", "HIGH PRODUCTIVITY"],
     image: "/equipment/hy-r260-r460-8c.jpg",
@@ -47,8 +47,8 @@ const equipment: Equipment[] = [
     name: "SEMI-ROTARY 6 COLOR",
     headline: "다양한 라벨을 위한 정밀하고 유연한 생산",
     body: [
-      "6색 세미 로타리 인쇄 시스템을 통해 소량·다품종부터 다양한 규격의 라벨까지 효율적으로 생산합니다.",
-      "작업 특성에 맞춘 유연한 생산과 정밀한 인쇄 품질로 변화하는 고객의 요구에 빠르게 대응합니다.",
+      "6색 세미 로타리 인쇄 시스템을 통해 소량·다품종부터 다양한 규격의 라벨까지\n효율적으로 생산합니다.",
+      "작업 특성에 맞춘 유연한 생산과 정밀한 인쇄 품질로 변화하는 고객의 요구에\n빠르게 대응합니다.",
     ],
     specs: ["6 COLOR", "SEMI-ROTARY", "SHORT RUN", "MULTI VARIETY"],
     image: "/equipment/semi-rotary-6.jpg",
@@ -58,8 +58,8 @@ const equipment: Equipment[] = [
     name: "WJJM-350",
     tagline: "MULTI-FUNCTIONAL DIE CUTTING",
     body: [
-      "인쇄가 완료된 라벨 원단을 제품의 형태에 맞게 정밀하게 가공하는 고속 다기능 다이커팅 시스템입니다.",
-      "간헐식 및 로터리 다이커팅에 대응하며 접착 라벨부터 IML·종이 라벨까지 다양한 후가공을 지원합니다.",
+      "인쇄가 완료된 라벨 원단을 제품의 형태에 맞게 정밀하게 가공하는\n고속 다기능 다이커팅 시스템입니다.",
+      "간헐식 및 로터리 다이커팅에 대응하며 접착 라벨부터 IML·종이 라벨까지\n다양한 후가공을 지원합니다.",
     ],
     specs: ["MAX. 350mm WEB WIDTH", "±0.15mm CUTTING ACCURACY", "ROTARY / INTERMITTENT"],
     image: "/equipment/wjjm-350.jpg",
@@ -69,8 +69,8 @@ const equipment: Equipment[] = [
     name: "HONTEC UniCon 350",
     tagline: "MULTI-FUNCTIONAL LABEL FINISHING SYSTEM",
     body: [
-      "인쇄된 라벨에 코팅, 콜드포일, 라미네이팅, 다이커팅, 인몰드 등 다양한 후가공을 적용할 수 있는 모듈형 라벨 컨버팅 시스템입니다.",
-      "제품의 소재와 디자인, 요구되는 품질에 따라 최적의 후가공 공정을 구성하여 더 선명하고 고급스러운 라벨을 완성합니다.",
+      "인쇄된 라벨에 코팅, 콜드포일, 라미네이팅, 다이커팅, 인몰드 등\n다양한 후가공을 적용할 수 있는 모듈형 라벨 컨버팅 시스템입니다.",
+      "제품의 소재와 디자인, 요구되는 품질에 따라 최적의 후가공 공정을 구성하여\n더 선명하고 고급스러운 라벨을 완성합니다.",
     ],
     specs: ["FLEXO", "COATING", "COLD FOIL", "LAMINATION", "DIE CUTTING"],
     image: "/equipment/unicon-350.jpg",
@@ -142,7 +142,7 @@ export default function EquipmentSection() {
                 )}
                 <div className="mt-4 space-y-3">
                   {item.body.map((paragraph) => (
-                    <p key={paragraph} className="text-text-light leading-relaxed">
+                    <p key={paragraph} className="text-text-light leading-relaxed whitespace-pre-line">
                       {paragraph}
                     </p>
                   ))}
